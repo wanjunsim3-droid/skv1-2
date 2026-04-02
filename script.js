@@ -69,47 +69,43 @@ const inquiryForm = document.getElementById('inquiryForm');
 
 if (inquiryForm) {
     inquiryForm.addEventListener('submit', function(e) {
+        // 기본 제출 막기 (우리가 직접 제어)
         e.preventDefault();
-        
-        const submitBtn = inquiryForm.querySelector('.submit-btn');
-        const originalBtnText = submitBtn.innerText;
         
         const name = document.getElementById('name').value;
         const phone = document.getElementById('phone').value;
         const inquiryType = document.getElementById('inquiryType').value;
 
-        // 구글 폼 Endpoint
+        // 구글 폼 Action URL (Response)
         const GOOGLE_FORM_URL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSeM4F73MyiIaWtKjzEYvkrcP4WObBxyti9vg0SUr3P5PW-ldg/formResponse";
 
-        // 데이터 조립
-        const formData = new FormData();
-        formData.append('entry.918255295', name);
-        formData.append('entry.381030079', phone);
-        formData.append('entry.1997573890', inquiryType);
+        // 숨겨진 iframe 생성 (페이지 이동 방지 및 확실한 전송)
+        let iframe = document.getElementById('hidden_confirm_iframe');
+        if (!iframe) {
+            iframe = document.createElement('iframe');
+            iframe.name = 'hidden_confirm_iframe';
+            iframe.id = 'hidden_confirm_iframe';
+            iframe.style.display = 'none';
+            document.body.appendChild(iframe);
+        }
 
-        // 버튼 비활성화 (중복 클릭 방지)
-        submitBtn.disabled = true;
-        submitBtn.innerText = "전송 중...";
+        // 폼 설정을 구글 폼으로 변경
+        inquiryForm.action = GOOGLE_FORM_URL;
+        inquiryForm.method = 'POST';
+        inquiryForm.target = 'hidden_confirm_iframe';
 
-        // Fetch API를 사용한 전송 (CORS 이슈로 opaque 모드 사용 가능)
-        fetch(GOOGLE_FORM_URL, {
-            method: 'POST',
-            mode: 'no-cors',
-            body: formData
-        })
-        .then(() => {
-            // 성공 처리 (no-cors 모드에서는 항상 이쪽으로 옵니다)
-            alert(`${name}님, 상담 예약이 정상적으로 접수되었습니다.\n확인 후 빠르게 연락드리겠습니다.`);
+        // 실제 전송 실행
+        inquiryForm.submit();
+
+        // 사용자 알림 및 폼 초기화
+        alert(`${name}님, 상담 예약이 정상적으로 접수되었습니다.\n확인 후 빠르게 연락드리겠습니다.`);
+        
+        // 전송 후 폼 초기화 및 속성 원상복구 (중요)
+        setTimeout(() => {
             inquiryForm.reset();
-        })
-        .catch((error) => {
-            console.error('Submission Error:', error);
-            alert("전송 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.");
-        })
-        .finally(() => {
-            submitBtn.disabled = false;
-            submitBtn.innerText = originalBtnText;
-        });
+            inquiryForm.action = '';
+            inquiryForm.target = '';
+        }, 500);
     });
 }
 

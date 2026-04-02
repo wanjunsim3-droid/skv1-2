@@ -743,10 +743,19 @@ footer {
     .cta-btn, .tel-btn {
         width: 100%;
         text-align: center;
-        padding: 18px 20px;
-        font-size: 1.2rem;
+        padding: 20px;
+        font-size: 1.4rem; /* 더 크게 */
         font-weight: 900;
-        justify-content: center;
+        display: flex; /* 가로 정렬 */
+        align-items: center; /* 수직 중앙 */
+        justify-content: center; /* 수평 중앙 */
+        gap: 12px; /* 아이콘과 숫자 간격 */
+    }
+
+    .tel-btn svg {
+        width: 28px; /* 아이콘 크기 키움 */
+        height: 28px;
+        stroke-width: 3; /* 아이콘 선 두께도 굵게 */
     }
 
     .section {

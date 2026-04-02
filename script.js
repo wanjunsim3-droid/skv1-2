@@ -73,13 +73,32 @@ if (inquiryForm) {
         
         const name = document.getElementById('name').value;
         const phone = document.getElementById('phone').value;
-        
-        // 실제 운영 환경에서는 API로 데이터를 전송해야 합니다.
-        // 현재는 시뮬레이션용 알럿입니다.
-        if (name && phone) {
-            alert(`${name}님, 성공적으로 상담 예약이 접수되었습니다.\n전문 상담사가 빠른 시일 내에 연락드리겠습니다.`);
-            inquiryForm.reset();
+        const inquiryType = document.getElementById('inquiryType').value;
+
+        // 구글 폼 Action URL (Response)
+        const GOOGLE_FORM_URL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSeM4F73MyiIaWtKjzEYvkrcP4WObBxyti9vg0SUr3P5PW-ldg/formResponse";
+
+        // 숨겨진 iframe 생성 (CORS 회피 및 페이지 이동 방지)
+        let iframe = document.getElementById('hidden_iframe');
+        if (!iframe) {
+            iframe = document.createElement('iframe');
+            iframe.name = 'hidden_iframe';
+            iframe.id = 'hidden_iframe';
+            iframe.style.display = 'none';
+            document.body.appendChild(iframe);
         }
+
+        // 폼의 전송 대상(target)을 iframe으로 설정
+        inquiryForm.action = GOOGLE_FORM_URL;
+        inquiryForm.method = 'POST';
+        inquiryForm.target = 'hidden_iframe';
+
+        // 데이터 전송
+        inquiryForm.submit();
+
+        // 사용자 피드백 및 폼 초기화
+        alert(`${name}님, 정상적으로 상담 예약이 접수되었습니다.\n확인 후 빠르게 연락드리겠습니다.`);
+        inquiryForm.reset();
     });
 }
 

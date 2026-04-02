@@ -16,13 +16,31 @@ window.addEventListener('scroll', () => {
         navbar.classList.add('scrolled');
     } else {
         navbar.classList.add('scrolled');
-        // 히어로 섹션에서도 배경을 보이게 하기 위해 항상 scrolled 상태 유지, 
-        // 다이나믹하게 바꾸려면 else에 remove('scrolled') 하면 되지만
-        // 흰색 로고가 안보일 위험이 있으니 스크롤 값에 따라 변경
         if (window.scrollY <= 50) {
              navbar.classList.remove('scrolled');
         }
     }
+});
+
+// 모바일 메뉴 토글
+const hamburger = document.querySelector('.hamburger');
+const mobileMenu = document.querySelector('.mobile-menu');
+const mobileLinks = document.querySelectorAll('.mobile-nav-links a');
+
+if (hamburger) {
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+        document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : 'auto';
+    });
+}
+
+mobileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    });
 });
 
 // 스무스 스크롤 (앵커 링크)

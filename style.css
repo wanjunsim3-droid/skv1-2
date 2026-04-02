@@ -584,6 +584,11 @@ footer {
     padding: 40px 0 20px;
 }
 
+/* Hide mobile menu by default on desktop */
+.mobile-menu {
+    display: none;
+}
+
 .footer-content {
     display: flex;
     justify-content: space-between;
@@ -651,8 +656,9 @@ footer {
         text-align: center;
     }
 
-    /* Mobile Menu Styles */
+    /* Mobile Menu Styles (Mobile Only) */
     .mobile-menu {
+        display: flex;
         position: fixed;
         top: 0;
         right: -100%;
@@ -660,7 +666,6 @@ footer {
         height: 100vh;
         background: var(--dark);
         z-index: 999;
-        display: flex;
         align-items: center;
         justify-content: center;
         transition: 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);

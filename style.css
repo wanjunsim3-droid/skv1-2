@@ -711,15 +711,39 @@ footer {
         background: var(--white) !important;
     }
 
-    /* Additional Mobile Refinements */
+    .navbar .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 0 20px;
+    }
+
     .hero {
         text-align: center;
-        padding-top: 80px;
+        padding-top: 100px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
     .hero-content {
         margin: 0 auto;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
+
+    .hero h2 {
+        font-size: 2.2rem;
+        word-break: keep-all;
+        margin-bottom: 25px;
+        line-height: 1.3;
+    }
+
+    .hero h2 br { display: none; }
 
     .hero-actions {
         display: flex;
@@ -729,11 +753,6 @@ footer {
         width: 100%;
         max-width: 350px;
         margin: 0 auto;
-    }
-
-    .hero h2 {
-        font-size: 2rem;
-        br { display: none; }
     }
 
     .badge {

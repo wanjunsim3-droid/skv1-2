@@ -654,6 +654,76 @@ footer {
     z-index: 10;
 }
 
+/* 썸네일 + 재생버튼 방식 */
+.video-thumb-link {
+    display: block;
+    max-width: 1000px;
+    margin: 0 auto;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+    text-decoration: none;
+    position: relative;
+}
+
+.video-thumb-wrap {
+    position: relative;
+    width: 100%;
+}
+
+.video-thumb-img {
+    width: 100%;
+    display: block;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    transition: transform 0.4s ease, brightness 0.4s ease;
+    filter: brightness(0.85);
+}
+
+.video-thumb-link:hover .video-thumb-img {
+    transform: scale(1.03);
+    filter: brightness(0.6);
+}
+
+.video-play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    transition: transform 0.3s ease;
+    filter: drop-shadow(0 4px 16px rgba(0,0,0,0.6));
+}
+
+.video-play-btn svg {
+    width: 80px;
+    height: 56px;
+}
+
+.video-thumb-link:hover .video-play-btn {
+    transform: translate(-50%, -60%) scale(1.15);
+}
+
+.video-play-label {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.7);
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 700;
+    padding: 10px 30px;
+    border-radius: 50px;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    backdrop-filter: blur(6px);
+    transition: background 0.3s;
+}
+
+.video-thumb-link:hover .video-play-label {
+    background: var(--primary);
+}
+
 .iframe-container {
     position: relative;
     width: 100%;

@@ -618,6 +618,18 @@ footer {
 .video-section.bg-dark {
     background: #0a0a0a;
     padding: 100px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh; /* 최소 높이 확보로 중앙 배치 강조 */
+}
+
+.video-section .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 
 .text-white {

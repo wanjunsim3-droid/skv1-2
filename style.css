@@ -652,6 +652,8 @@ footer {
     overflow: hidden;
     box-shadow: 0 30px 60px rgba(0,0,0,0.5);
     background: #000;
+    z-index: 10; /* 다른 요소보다 위에 배치 */
+    visibility: visible !important; /* 항상 보이게 설정 */
 }
 
 .video-player video {

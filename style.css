@@ -648,26 +648,18 @@ footer {
 .video-player {
     position: relative;
     width: 100%;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+    max-width: 1000px;
+    margin: 0 auto;
     background: #000;
-    z-index: 10; /* 다른 요소보다 위에 배치 */
-    visibility: visible !important; /* 항상 보이게 설정 */
-}
-
-.video-player video {
-    width: 100%;
-    display: block;
-    aspect-ratio: 16/9;
-    object-fit: cover;
+    z-index: 10;
 }
 
 .iframe-container {
     position: relative;
-    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-    height: 0;
-    overflow: hidden;
+    width: 100%;
+    height: 56.25vw; /* 화면 너비에 따른 16:9 비율 강제 지정 */
+    max-height: 562.5px; /* PC에서의 최대 높이 제한 (1000px의 56.25%) */
+    min-height: 250px; /* 모바일에서 최소 높이 보장 */
 }
 
 .iframe-container iframe {

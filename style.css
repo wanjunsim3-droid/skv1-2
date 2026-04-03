@@ -810,6 +810,28 @@ footer {
         font-size: 0.9rem;
     }
 
+    /* 모바일 홍보영상 최적화: 화면 꽉 채우기 */
+    .video-section.bg-dark {
+        padding: 40px 0;
+    }
+
+    .video-section .container {
+        padding: 0; /* 좌우 여백 제거 */
+    }
+
+    .video-section .section-title {
+        padding: 0 20px; /* 제목은 여백 유지 */
+    }
+
+    .video-wrapper {
+        max-width: 100%;
+        border-radius: 0; /* 모바일에서는 꽉 찬 느낌을 위해 라운드 제거 */
+    }
+
+    .video-player {
+        border-radius: 0;
+    }
+
     .cta-btn, .tel-btn {
         width: 100%;
         text-align: center;

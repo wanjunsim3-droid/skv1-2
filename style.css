@@ -1033,3 +1033,24 @@ footer {
 .rsvp-submit-btn:hover { background: var(--primary); }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes slideUp { from { opacity: 0; transform: translateY(30px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+/* --- 모바일 초대장 전용 팝업 CSS 스타일 추가 --- */
+.rsvp-invite-mode { max-width: 450px !important; border-radius: 0 !important; background: linear-gradient(to bottom, #ffffff, #fdfbf7); }
+.invitation-text { padding: 40px 30px 20px; text-align: center; }
+.invitation-text h2 { font-size: 1.4rem; color: #444; margin-bottom: 30px; font-weight: 300; line-height: 1.5; letter-spacing: -0.5px; }
+.invitation-text h2 strong { color: var(--primary); font-weight: 700; }
+.info-block-wrap { background: #fdfdfd; border: 1px solid #eaeaea; padding: 25px 20px; margin-bottom: 30px; border-radius: 12px; }
+.info-block { margin-bottom: 20px; }
+.info-block:last-child { margin-bottom: 0; }
+.info-block strong { display: block; color: var(--primary); font-size: 0.95rem; margin-bottom: 5px; }
+.info-block p { color: #333; font-size: 1.05rem; font-weight: 500; word-break: keep-all; }
+.invite-msg { margin: 30px 0; padding-top: 30px; border-top: 1px solid #ddd; }
+.eng-title { display: block; font-family: serif; font-size: 1.2rem; color: #bbb; margin-bottom: 15px; letter-spacing: 2px; }
+.invite-msg p { color: #666; font-size: 0.95rem; margin-bottom: 15px; word-break: keep-all; font-weight: 400; line-height: 1.8; }
+.gift-notice { background: rgba(243, 112, 33, 0.08); border-radius: 8px; padding: 15px; text-align: left; margin-bottom: 10px; border-left: 4px solid var(--secondary); }
+.gift-notice p { color: #444; font-size: 0.9rem; font-weight: 600; margin-bottom: 5px; }
+.gift-notice p.highlight { color: var(--primary); font-weight: 800; margin-bottom: 0; }
+.form-row { display: flex; gap: 10px; }
+.half { flex: 1; }
+.rsvp-invite-mode .rsvp-form { padding: 0 30px 30px; border-top: none; }
+

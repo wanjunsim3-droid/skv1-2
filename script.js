@@ -227,6 +227,15 @@ if (popupInquiryForm) {
     popupInquiryForm.addEventListener('submit', function(e) {
         e.preventDefault();
 
+        // 텔레그램 및 구글 폼에 전송할 이름 데이터 조합 (이름 + 참석여부 + 동행인원)
+        const guestName = document.getElementById('guestName').value;
+        const attendStatus = document.getElementById('attendStatus').value;
+        const guestCount = document.getElementById('guestCount').value;
+        const statusString = `[${attendStatus}] ${guestName} (동행 ${guestCount})`;
+        
+        // 실제 구글 폼에 전송되는 숨겨진 input 필드에 조합된 텍스트 삽입
+        document.getElementById('realNameInput').value = statusString;
+
         const GOOGLE_FORM_URL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSeM4F73MyiIaWtKjzEYvkrcP4WObBxyti9vg0SUr3P5PW-ldg/formResponse";
 
         let iframe = document.getElementById('hidden_confirm_iframe');
@@ -244,7 +253,7 @@ if (popupInquiryForm) {
 
         popupInquiryForm.submit();
 
-        alert(`정상적으로 등록되었습니다.\n감사합니다.`);
+        alert(`정상적으로 등록되었습니다.\n참석 여부를 알려주셔서 감사합니다.`);
         
         setTimeout(() => {
             popupInquiryForm.reset();

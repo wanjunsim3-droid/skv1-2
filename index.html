@@ -517,6 +517,49 @@
         </div>
     </footer>
 
+    <!-- 플로팅 하단 고정 버튼 (모바일 초대장 스타일) -->
+    <div class="floating-bottom-bar">
+        <button id="openModalBtn" class="floating-btn">상품설명회 참석 / 관심고객 등록하기</button>
+    </div>
+
+    <!-- 팝업 모달 폼 (설문지 형태) -->
+    <div id="rsvpModal" class="rsvp-modal">
+        <div class="rsvp-modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="rsvp-header">
+                <h3>관심고객 & 참석 등록</h3>
+                <p>청라 SK V1 상품설명회 및 VIP 혜택을 안내받으세요.</p>
+            </div>
+            
+            <form class="rsvp-form" id="popupInquiryForm">
+                <!-- 구글 폼의 entry와 맞춤 -->
+                <div class="rsvp-group">
+                    <label>성함 (필수)</label>
+                    <input type="text" name="entry.918255295" required placeholder="예) 홍길동">
+                </div>
+                <div class="rsvp-group">
+                    <label>연락처 (필수)</label>
+                    <input type="tel" name="entry.381030079" required placeholder="예) 010-1234-5678">
+                </div>
+                <div class="rsvp-group">
+                    <label>문의 종류 (필수)</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="entry.1997573890" value="방문예약/상품설명회 참석" required> 상품설명회 참석</label>
+                        <label><input type="radio" name="entry.1997573890" value="잔여호실/견적문의"> 잔여호실 및 견적</label>
+                        <label><input type="radio" name="entry.1997573890" value="로열층/투자상담"> 로열층/투자</label>
+                    </div>
+                </div>
+                <div class="rsvp-group privacy-group">
+                    <label>
+                        <input type="checkbox" required> <span>개인정보 수집 및 이용에 동의합니다. (행사 종료 및 분양 완료시 파기)</span>
+                    </label>
+                </div>
+                
+                <button type="submit" class="rsvp-submit-btn">등록 신청하기</button>
+            </form>
+        </div>
+    </div>
+
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <script src="script.js"></script>

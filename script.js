@@ -192,3 +192,66 @@ if (document.querySelector('.about-swiper')) {
         }
     });
 }
+
+// 팝업 모달 로직
+const modal = document.getElementById('rsvpModal');
+const openModalBtn = document.getElementById('openModalBtn');
+const closeModalBtn = document.querySelector('.close-modal');
+
+if (openModalBtn && modal) {
+    openModalBtn.addEventListener('click', () => {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden'; // 내용 스크롤 방지
+    });
+}
+
+if (closeModalBtn && modal) {
+    closeModalBtn.addEventListener('click', () => {
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    });
+}
+
+// 모달 바깥부분 클릭 시 닫기
+window.addEventListener('click', (e) => {
+    if (e.target === modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+});
+
+// 팝업 폼 전송 로직 (기존 구글 폼 URL 재사용)
+const popupInquiryForm = document.getElementById('popupInquiryForm');
+
+if (popupInquiryForm) {
+    popupInquiryForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const GOOGLE_FORM_URL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSeM4F73MyiIaWtKjzEYvkrcP4WObBxyti9vg0SUr3P5PW-ldg/formResponse";
+
+        let iframe = document.getElementById('hidden_confirm_iframe');
+        if (!iframe) {
+            iframe = document.createElement('iframe');
+            iframe.name = 'hidden_confirm_iframe';
+            iframe.id = 'hidden_confirm_iframe';
+            iframe.style.display = 'none';
+            document.body.appendChild(iframe);
+        }
+
+        popupInquiryForm.action = GOOGLE_FORM_URL;
+        popupInquiryForm.method = 'POST';
+        popupInquiryForm.target = 'hidden_confirm_iframe';
+
+        popupInquiryForm.submit();
+
+        alert(`정상적으로 등록되었습니다.\n감사합니다.`);
+        
+        setTimeout(() => {
+            popupInquiryForm.reset();
+            popupInquiryForm.action = '';
+            popupInquiryForm.target = '';
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }, 500);
+    });
+}

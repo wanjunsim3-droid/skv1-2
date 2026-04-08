@@ -1,5 +1,5 @@
 // AOS 애니메이션 초기화
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     AOS.init({
         once: true,
         offset: 100,
@@ -17,7 +17,7 @@ window.addEventListener('scroll', () => {
     } else {
         navbar.classList.add('scrolled');
         if (window.scrollY <= 50) {
-             navbar.classList.remove('scrolled');
+            navbar.classList.remove('scrolled');
         }
     }
 });
@@ -47,7 +47,7 @@ mobileLinks.forEach(link => {
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        
+
         const targetId = this.getAttribute('href');
         if (targetId === '#') return;
 
@@ -55,7 +55,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         if (targetElement) {
             const navHeight = navbar.offsetHeight;
             const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navHeight;
-            
+
             window.scrollTo({
                 top: targetPosition,
                 behavior: 'smooth'
@@ -66,46 +66,50 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 // 폼 제출 이벤트
 const inquiryForm = document.getElementById('inquiryForm');
+const submitBtn = document.getElementById('submitBtn');
 
 if (inquiryForm) {
-    inquiryForm.addEventListener('submit', function(e) {
-        // 기본 제출 막기 (우리가 직접 제어)
-        e.preventDefault();
-        
+    inquiryForm.addEventListener('submit', function (e) {
+        e.preventDefault(); // 기본 제출 막기
+
         const name = document.getElementById('name').value;
         const phone = document.getElementById('phone').value;
-        const inquiryType = document.getElementById('inquiryType').value;
 
-        // 구글 폼 Action URL (Response)
-        const GOOGLE_FORM_URL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSeM4F73MyiIaWtKjzEYvkrcP4WObBxyti9vg0SUr3P5PW-ldg/formResponse";
+        // 제출 버튼 상태 변경 (중복 클릭 방지)
+        const originalBtnText = submitBtn.innerText;
+        submitBtn.innerText = '접수 중...';
+        submitBtn.disabled = true;
 
-        // 숨겨진 iframe 생성 (페이지 이동 방지 및 확실한 전송)
-        let iframe = document.getElementById('hidden_confirm_iframe');
-        if (!iframe) {
-            iframe = document.createElement('iframe');
-            iframe.name = 'hidden_confirm_iframe';
-            iframe.id = 'hidden_confirm_iframe';
-            iframe.style.display = 'none';
-            document.body.appendChild(iframe);
+        // 고객님의 구글 앱스 스크립트 웹앱 URL (배포 후 발급받은 URL로 교체하세요)
+        const GOOGLE_APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyEbq9SoeTNaBIzTLw3upszR6WAsnsvuhBVIQuZaRSFGqgp086u33AwgX_3CEDf_j1h/exec";
+
+        if (GOOGLE_APP_SCRIPT_URL === "여기에_구글_스크립트_URL을_입력하세요") {
+            alert("구글 스프레드시트 스크립트 URL이 설정되지 않았습니다. 관리자에게 문의하세요.");
+            submitBtn.innerText = originalBtnText;
+            submitBtn.disabled = false;
+            return;
         }
 
-        // 폼 설정을 구글 폼으로 변경
-        inquiryForm.action = GOOGLE_FORM_URL;
-        inquiryForm.method = 'POST';
-        inquiryForm.target = 'hidden_confirm_iframe';
+        const formData = new FormData(inquiryForm);
 
-        // 실제 전송 실행
-        inquiryForm.submit();
-
-        // 사용자 알림 및 폼 초기화
-        alert(`${name}님, 상담 예약이 정상적으로 접수되었습니다.\n확인 후 빠르게 연락드리겠습니다.`);
-        
-        // 전송 후 폼 초기화 및 속성 원상복구 (중요)
-        setTimeout(() => {
-            inquiryForm.reset();
-            inquiryForm.action = '';
-            inquiryForm.target = '';
-        }, 500);
+        fetch(GOOGLE_APP_SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            body: formData
+        })
+            .then(() => {
+                // no-cors 모드에서는 response.ok를 확인할 수 없음 (무조건 성공으로 간주됨)
+                alert(`${name}님, 상담 예약이 정상적으로 접수되었습니다.\n확인 후 빠르게 연락드리겠습니다.`);
+                inquiryForm.reset();
+            })
+            .catch(error => {
+                console.error('Error!', error.message);
+                alert('접수 중 오류가 발생했습니다. 나중에 다시 시도해주세요.');
+            })
+            .finally(() => {
+                submitBtn.innerText = originalBtnText;
+                submitBtn.disabled = false;
+            });
     });
 }
 

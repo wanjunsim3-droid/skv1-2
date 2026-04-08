@@ -300,13 +300,13 @@ h1, h2, h3, h4 {
     text-align: left;
 }
 
-.section-title h3 {
+.section-title h2 {
     font-size: 2.5rem;
     margin-bottom: 15px;
     color: var(--dark);
 }
 
-.section-title h3 strong {
+.section-title h2 strong {
     color: var(--primary);
 }
 
@@ -339,7 +339,7 @@ h1, h2, h3, h4 {
     transform: translateY(-10px);
 }
 
-.about-card h4 {
+.about-card h3 {
     font-size: 1.3rem;
     color: var(--primary);
     margin-bottom: 15px;
@@ -421,7 +421,7 @@ h1, h2, h3, h4 {
     color: var(--white);
 }
 
-.premium .section-title h3 {
+.premium .section-title h2 {
     color: var(--white);
 }
 
@@ -455,7 +455,7 @@ h1, h2, h3, h4 {
     margin-bottom: 20px;
 }
 
-.premium-item h4 {
+.premium-item h3 {
     font-size: 1.5rem;
     margin-bottom: 15px;
     color: var(--gold-light);
@@ -502,7 +502,7 @@ h1, h2, h3, h4 {
     border-radius: 50%;
 }
 
-.contact-text h3 {
+.contact-text h2 {
     font-size: 2rem;
     margin-bottom: 20px;
 }
@@ -769,7 +769,7 @@ footer {
         font-size: 1.1rem;
     }
 
-    .section-title h3 {
+    .section-title h2 {
         font-size: 2rem;
     }
 

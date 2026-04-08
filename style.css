@@ -1088,3 +1088,10 @@ footer {
     100% { box-shadow: 0 4px 25px rgba(26, 115, 232, 0.8); }
 }
 
+/* 하단 고정 바 분할 레이아웃 디자인 */
+.floating-bottom-bar.flex-bar { display: flex; gap: 10px; max-width: 600px; margin: 0 auto; left: 0; right: 0; align-items: center; justify-content: center; }
+.floating-bottom-bar.flex-bar .floating-btn { width: 50%; max-width: none; font-size: 1.05rem; display: flex; align-items: center; justify-content: center; gap: 5px; text-decoration: none; padding: 14px 10px; font-weight: 800; letter-spacing: -0.5px; }
+.floating-bottom-bar.flex-bar .call-btn { background: #333; color: var(--gold-light); box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+.floating-bottom-bar.flex-bar .call-btn:hover { background: #000; }
+.floating-bottom-bar.flex-bar .rsvp-btn { background: var(--primary); }
+

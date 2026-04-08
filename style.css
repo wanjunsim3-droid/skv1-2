@@ -1013,7 +1013,7 @@ footer {
 .floating-btn:hover { transform: translateY(-2px); background: #d01820; }
 .rsvp-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); z-index: 9999; justify-content: center; align-items: center; padding: 20px; animation: fadeIn 0.3s ease forwards; }
 .rsvp-modal.active { display: flex; }
-.rsvp-modal-content { background: #fff; width: 100%; max-width: 500px; border-radius: 16px; position: relative; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.2); animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.rsvp-modal-content { background: #fff; width: 100%; max-width: 500px; max-height: 90vh; border-radius: 16px; position: relative; overflow-y: auto; box-shadow: 0 20px 40px rgba(0,0,0,0.2); animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 .close-modal { position: absolute; top: 15px; right: 20px; font-size: 2rem; color: #999; cursor: pointer; transition: color 0.2s; z-index: 10; line-height: 1; }
 .close-modal:hover { color: #333; }
 .rsvp-header { background: #f8f9fa; padding: 30px 30px 20px; text-align: center; border-bottom: 1px solid #eee; }

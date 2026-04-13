@@ -123,6 +123,24 @@
       }
     }
     </script>
+
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1110570880698696');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1110570880698696&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
 </head>
 <body>
     <header class="navbar" id="navbar">
@@ -165,11 +183,7 @@
             <p>IHP 도시첨단산업단지 내 핵심 입지, 청라 SK V1 지식산업센터 특별 분양 시작</p>
             <div class="hero-actions">
                 <a href="#contact" class="cta-btn">특별 혜택 확인하기</a>
-                <a href="https://gemini.google.com/share/60c49d7cbd36" target="_blank" class="cta-btn ai-btn">✨ AI 상담사가 알려주는 핵심 요약 보기</a>
-                <a href="tel:1666-5984" class="tel-btn">
-                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                    1666-5984
-                </a>
+                <button id="openAiModalBtn" class="cta-btn ai-btn">✨ AI 상담사가 알려주는 핵심 요약 보기</button>
             </div>
         </div>
     </section>
@@ -647,6 +661,38 @@
                 
                 <button type="submit" class="rsvp-submit-btn">참석 여부 전달하기</button>
             </form>
+    </div>
+
+    <!-- AI 요약 모달 폼 -->
+    <div id="aiModal" class="rsvp-modal">
+        <div class="rsvp-modal-content" style="max-width: 600px; padding: 40px 25px;">
+            <span class="close-modal">&times;</span>
+            
+            <div style="text-align: center; margin-bottom: 25px;">
+                <span style="font-size: 3.5rem;">✨</span>
+                <h2 style="font-size: 1.6rem; margin-top: 15px; color: #1A73E8; font-weight: 800; line-height: 1.4; word-break: keep-all;">AI 부동산 비서가 분석한<br>청라 SK V1 핵심 요약</h2>
+                <p style="color: #666; margin-top: 10px; font-size: 1rem; word-break: keep-all;">바쁘신 대표님을 위해 <strong>핵심 투자 및 사옥 마련 포인트</strong>를 3분 만에 읽을 수 있도록 정리했습니다.</p>
+            </div>
+            
+            <div style="background: #f8f9fa; border-radius: 12px; padding: 25px 20px; text-align: left; line-height: 1.7; font-size: 1.05rem; border: 1px solid #e9ecef;">
+                <h3 style="color: #222; border-bottom: 2px solid #1A73E8; padding-bottom: 12px; margin-bottom: 18px; font-size: 1.25rem;">🏢 왜 청라 SK V1을 선택해야 할까요?</h3>
+                
+                <p style="margin-bottom: 8px;"><strong>🛡️ 1. 완벽한 원금 보호 (환매 조건부)</strong></p>
+                <p style="color: #555; font-size: 0.95rem; margin-bottom: 20px; word-break: keep-all;">가격 하락이 걱정되시나요? 입주 시점에 손실이 우려된다면 시행사에 재매입을 요청할 수 있어 안전마진이 완벽히 보호됩니다.</p>
+                
+                <p style="margin-bottom: 8px;"><strong>💰 2. 초기 부담 Zero, 파격적 자금 지원</strong></p>
+                <p style="color: #555; font-size: 0.95rem; margin-bottom: 20px; word-break: keep-all;">초기 <strong>계약금 10%</strong> 외에 자금 압박을 없앴습니다. 최대 80% 이상의 높은 한도 대출은 물론, <strong>시행사가 직접 잔금(최대 30%)을 대여(금리 4.5% 고정, 이자 후불제)</strong>합니다.</p>
+                
+                <p style="margin-bottom: 8px;"><strong>📉 3. 평당 700만 원대, 최대 26% 파격 할인</strong></p>
+                <p style="color: #555; font-size: 0.95rem; margin-bottom: 20px; word-break: keep-all;">평균 23%에서 최대 26%까지 적용되는 직접 할인을 통해 압도적인 가격 경쟁력을 확보할 수 있습니다.</p>
+                
+                <p style="margin-bottom: 8px;"><strong>🏗️ 4. IHP 내 최대 랜드마크 등극</strong></p>
+                <p style="color: #555; font-size: 0.95rem; margin-bottom: 0px; word-break: keep-all;">대지 8천평, 연면적 3만8천평! 탁 트인 높은 층고와 전 층 직선형 드라이브인·도어투도어 특화 설계로 기업의 업무 효율을 극대화했습니다.</p>
+            </div>
+            
+            <div style="margin-top: 30px; text-align: center;">
+                <button id="aiModalContactBtn" class="submit-btn" style="background: #1A73E8; max-width: 300px; margin: 0 auto; display: block; border-radius: 30px; box-shadow: 0 5px 15px rgba(26,115,232,0.3);">📞 최신 잔여호실 확인하기</button>
+            </div>
         </div>
     </div>
 

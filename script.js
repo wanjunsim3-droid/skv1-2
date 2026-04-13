@@ -97,6 +97,11 @@ if (inquiryForm) {
         // 실제 전송 실행
         inquiryForm.submit();
 
+        // 메타 픽셀 Lead 이벤트 전송
+        if (typeof fbq === 'function') {
+            fbq('track', 'Lead');
+        }
+
         // 사용자 알림 및 폼 초기화
         alert(`${name}님, 상담 예약이 정상적으로 접수되었습니다.\n확인 후 빠르게 연락드리겠습니다.`);
         
@@ -193,10 +198,32 @@ if (document.querySelector('.about-swiper')) {
     });
 }
 
-// 팝업 모달 로직
+// 팝업 모달 공통 로직
+const modals = document.querySelectorAll('.rsvp-modal');
+const closeBtns = document.querySelectorAll('.close-modal');
+
+closeBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+        const modalToClose = this.closest('.rsvp-modal');
+        if (modalToClose) {
+            modalToClose.classList.remove('active');
+        }
+        document.body.style.overflow = 'auto';
+    });
+});
+
+window.addEventListener('click', (e) => {
+    modals.forEach(m => {
+        if (e.target === m) {
+            m.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+    });
+});
+
+// RSVP 모달 (기존 modal 변수 유지 - 하위 호환성)
 const modal = document.getElementById('rsvpModal');
 const openModalBtn = document.getElementById('openModalBtn');
-const closeModalBtn = document.querySelector('.close-modal');
 
 if (openModalBtn && modal) {
     openModalBtn.addEventListener('click', () => {
@@ -205,20 +232,36 @@ if (openModalBtn && modal) {
     });
 }
 
-if (closeModalBtn && modal) {
-    closeModalBtn.addEventListener('click', () => {
-        modal.classList.remove('active');
-        document.body.style.overflow = 'auto';
+// AI 모달 
+const aiModal = document.getElementById('aiModal');
+const openAiModalBtn = document.getElementById('openAiModalBtn');
+
+if (openAiModalBtn && aiModal) {
+    openAiModalBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        aiModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
     });
 }
 
-// 모달 바깥부분 클릭 시 닫기
-window.addEventListener('click', (e) => {
-    if (e.target === modal) {
-        modal.classList.remove('active');
+// AI 모달 내부 상당예약 버튼
+const aiModalContactBtn = document.getElementById('aiModalContactBtn');
+if(aiModalContactBtn && aiModal) {
+    aiModalContactBtn.addEventListener('click', () => {
+        aiModal.classList.remove('active');
         document.body.style.overflow = 'auto';
-    }
-});
+        const targetElement = document.getElementById('contact');
+        if (targetElement) {
+            const navbar = document.getElementById('navbar');
+            const navHeight = navbar ? navbar.offsetHeight : 0;
+            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navHeight;
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+        }
+    });
+}
 
 // 팝업 폼 전송 로직 (기존 구글 폼 URL 재사용)
 const popupInquiryForm = document.getElementById('popupInquiryForm');
@@ -253,13 +296,20 @@ if (popupInquiryForm) {
 
         popupInquiryForm.submit();
 
+        // 메타 픽셀 Schedule 이벤트 전송
+        if (typeof fbq === 'function') {
+            fbq('track', 'Schedule');
+        }
+
         alert(`정상적으로 등록되었습니다.\n참석 여부를 알려주셔서 감사합니다.`);
         
         setTimeout(() => {
             popupInquiryForm.reset();
             popupInquiryForm.action = '';
             popupInquiryForm.target = '';
-            modal.classList.remove('active');
+            if (modal) {
+                modal.classList.remove('active');
+            }
             document.body.style.overflow = 'auto';
         }, 500);
     });

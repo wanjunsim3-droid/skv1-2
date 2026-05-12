@@ -1095,3 +1095,44 @@ footer {
 .floating-bottom-bar.flex-bar .call-btn:hover { background: #000; }
 .floating-bottom-bar.flex-bar .rsvp-btn { background: var(--primary); }
 
+
+/* Additional Mobile Optimizations */
+@media (max-width: 768px) {
+    body {
+        padding-bottom: 75px;
+    }
+
+    .section-title {
+        margin-bottom: 30px;
+    }
+
+    .form-group input[type='text'],
+    .form-group input[type='tel'],
+    .form-group select {
+        padding: 16px 15px;
+        font-size: 16px; /* Prevents iOS zoom */
+    }
+
+    .submit-btn {
+        padding: 18px;
+        font-size: 1.15rem;
+    }
+
+    .swiper-button-next, .swiper-button-prev {
+        display: none !important;
+    }
+
+    .rsvp-modal-content {
+        padding: 25px 15px !important;
+        margin: 0 10px;
+        max-height: 90vh;
+    }
+
+    .benefit-card {
+        padding: 30px 20px;
+    }
+
+    .hero-actions {
+        padding: 0 20px;
+    }
+}

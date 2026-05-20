@@ -238,3 +238,125 @@ if (aiModalContactBtn && aiModal) {
         }
     });
 }
+
+// ===== 호실 검색 기능 =====
+(function() {
+    let roomData = [];
+
+    const floorSelect = document.getElementById('filterFloor');
+    const usageSelect = document.getElementById('filterUsage');
+    const tableBody = document.getElementById('rsTableBody');
+    const resultCount = document.getElementById('rsResultCount');
+
+    if (!floorSelect || !usageSelect || !tableBody) return;
+
+    // 금액 포맷 (억/만원 표기)
+    function formatPrice(num) {
+        if (!num && num !== 0) return '-';
+        const eok = Math.floor(num / 100000000);
+        const man = Math.round((num % 100000000) / 10000);
+        if (eok > 0 && man > 0) {
+            return eok + '억 ' + man.toLocaleString() + '만';
+        } else if (eok > 0) {
+            return eok + '억';
+        } else {
+            return man.toLocaleString() + '만';
+        }
+    }
+
+    // 층 정렬 순서
+    function floorOrder(f) {
+        if (f === 'B2') return -2;
+        if (f === 'B1') return -1;
+        const m = f.match(/(\d+)/);
+        return m ? parseInt(m[1]) : 99;
+    }
+
+    // 드롭다운 채우기
+    function populateFilters(data) {
+        const floors = [...new Set(data.map(d => d.floor))];
+        floors.sort((a, b) => floorOrder(a) - floorOrder(b));
+        floors.forEach(f => {
+            const opt = document.createElement('option');
+            opt.value = f;
+            opt.textContent = f;
+            floorSelect.appendChild(opt);
+        });
+
+        const usages = [...new Set(data.map(d => d.usage))];
+        usages.sort();
+        usages.forEach(u => {
+            const opt = document.createElement('option');
+            opt.value = u;
+            opt.textContent = u;
+            usageSelect.appendChild(opt);
+        });
+    }
+
+    // 테이블 렌더링
+    function renderTable(data) {
+        tableBody.innerHTML = '';
+
+        if (data.length === 0) {
+            tableBody.innerHTML = '<tr class="rs-empty-row"><td colspan="9">검색 조건에 맞는 호실이 없습니다.</td></tr>';
+            resultCount.innerHTML = '검색 결과: <strong>0</strong>개 호실';
+            return;
+        }
+
+        resultCount.innerHTML = '검색 결과: <strong>' + data.length + '</strong>개 호실';
+
+        data.forEach(d => {
+            const tr = document.createElement('tr');
+            tr.innerHTML =
+                '<td>' + d.floor + '</td>' +
+                '<td>' + d.unit + '</td>' +
+                '<td>' + d.usage + '</td>' +
+                '<td>' + (d.area_contract != null ? d.area_contract.toFixed(2) : '-') + '</td>' +
+                '<td>' + (d.area_exclusive != null ? d.area_exclusive.toFixed(2) : '-') + '</td>' +
+                '<td>' + formatPrice(d.price_original) + '</td>' +
+                '<td>' + (d.discount_rate != null ? d.discount_rate + '%' : '-') + '</td>' +
+                '<td>' + formatPrice(d.price_final) + '</td>' +
+                '<td><a href="#contact" class="rs-consult-btn">상담신청</a></td>';
+            tableBody.appendChild(tr);
+        });
+    }
+
+    // 필터링
+    function applyFilter() {
+        const fFloor = floorSelect.value;
+        const fUsage = usageSelect.value;
+
+        let filtered = roomData;
+        if (fFloor !== 'all') {
+            filtered = filtered.filter(d => d.floor === fFloor);
+        }
+        if (fUsage !== 'all') {
+            filtered = filtered.filter(d => d.usage === fUsage);
+        }
+
+        // 정렬: 층 → 호실
+        filtered.sort((a, b) => {
+            const fo = floorOrder(a.floor) - floorOrder(b.floor);
+            if (fo !== 0) return fo;
+            return a.unit.localeCompare(b.unit, 'ko');
+        });
+
+        renderTable(filtered);
+    }
+
+    floorSelect.addEventListener('change', applyFilter);
+    usageSelect.addEventListener('change', applyFilter);
+
+    // 데이터 로드
+    fetch('assets/room_data.json')
+        .then(res => res.json())
+        .then(data => {
+            roomData = data;
+            populateFilters(data);
+            applyFilter();
+        })
+        .catch(err => {
+            console.error('Room data load error:', err);
+            tableBody.innerHTML = '<tr class="rs-empty-row"><td colspan="9">데이터를 불러올 수 없습니다.</td></tr>';
+        });
+})();

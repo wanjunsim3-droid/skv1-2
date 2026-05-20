@@ -168,6 +168,7 @@
                 <a href="#premium">프리미엄</a>
                 <a href="#location">입지여건</a>
                 <a href="#floor">층별안내</a>
+                <a href="#room-search">호실검색</a>
                 <a href="#contact" class="cta-btn-sm">분양상담</a>
             </nav>
             <div class="hamburger">
@@ -182,6 +183,7 @@
                     <a href="#premium">프리미엄</a>
                     <a href="#location">입지여건</a>
                     <a href="#floor">층별안내</a>
+                    <a href="#room-search">호실검색</a>
                     <a href="#contact" class="cta-btn-sm">분양상담</a>
                 </nav>
             </div>
@@ -496,6 +498,58 @@
             </div>
         </div>
     </section>
+
+    <!-- ===== 호실 검색 섹션 ===== -->
+    <section class="section room-search-section" id="room-search">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h3>호실 <strong>분양가 검색</strong></h3>
+                <p>층수와 용도를 선택하면 해당 호실의 할인 분양가를 바로 확인하실 수 있습니다.</p>
+            </div>
+
+            <div class="room-search-filters" data-aos="fade-up">
+                <div class="rs-filter-group">
+                    <label for="filterFloor">층 선택</label>
+                    <select id="filterFloor">
+                        <option value="all">전체 층</option>
+                    </select>
+                </div>
+                <div class="rs-filter-group">
+                    <label for="filterUsage">용도 선택</label>
+                    <select id="filterUsage">
+                        <option value="all">전체 용도</option>
+                    </select>
+                </div>
+                <div class="rs-filter-group rs-result-count">
+                    <span id="rsResultCount">검색 결과: <strong>0</strong>개 호실</span>
+                </div>
+            </div>
+
+            <div class="room-search-table-wrap" data-aos="fade-up" data-aos-delay="100">
+                <table class="rs-table" id="rsTable">
+                    <thead>
+                        <tr>
+                            <th>층</th>
+                            <th>호실</th>
+                            <th>용도</th>
+                            <th>계약면적(평)</th>
+                            <th>전용면적(평)</th>
+                            <th>원분양가</th>
+                            <th>할인율</th>
+                            <th>할인분양가</th>
+                            <th>상담</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rsTableBody">
+                        <tr class="rs-empty-row">
+                            <td colspan="9">데이터를 불러오는 중...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    <!-- ===== /호실 검색 섹션 ===== -->
 
     <section class="section contact" id="contact">
         <div class="container">

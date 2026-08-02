@@ -347,8 +347,8 @@ if (aiModalContactBtn && aiModal) {
     floorSelect.addEventListener('change', applyFilter);
     usageSelect.addEventListener('change', applyFilter);
 
-    // 데이터 로드
-    fetch('assets/room_data.json')
+    // 데이터 로드 (캐시 방지 적용)
+    fetch('assets/room_data.json?v=' + Date.now(), { cache: 'no-store' })
         .then(res => res.json())
         .then(data => {
             roomData = data;
